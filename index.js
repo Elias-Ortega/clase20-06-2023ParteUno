@@ -1,14 +1,20 @@
-const http = require("node:http");
+const express = require('express');
+const app = express();
 
-http.createServer((request, response) => {
+app.get('/', (request, response) => {
+    response.send('Esta es mi primera página');
+});
 
-    //metodo de http para crear el servidor
+app.get('/inicio', (request, response) => {
+    response.send('Esta es mi página de inicio');
+});
 
-    response.write("Hola esta es mi primera respuesta desde un servidor"); //Response es para dar una respuesta al evento
+app.get('/bienvenidos', (request, response) => {
+    response.send('Esta es mi página de bienvenida');
+});
 
-    response.end();
+app.get('*', (request, response) => {
+    response.send('404 | Recurso no encontrado');
+});
 
-  }).listen(8080); //Puerto que va a escuchar la llamada
-
-
-console.log("Escuchando por el puerto 8080");
+app.listen(8080);
